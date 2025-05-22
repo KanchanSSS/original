@@ -1,0 +1,33 @@
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+
+using System;
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        Singleton fromEmp = Singleton.GetInstance();
+        fromEmp.PrintResult("Emp1");
+        Singleton fromEmp1 = Singleton.GetInstance();
+        fromEmp.PrintResult("Emp2");
+    }
+}
+
+public sealed class Singleton
+{
+    private Singleton()
+    {
+        Console.WriteLine("Constructor called");
+    }
+    private static Singleton instance = null;
+    public static Singleton GetInstance()
+    {
+        if(instance == null)
+            instance = new Singleton();
+        return instance;
+    }
+    public void PrintResult(string message)
+    {
+        Console.WriteLine(message);
+    }
+}

@@ -1,0 +1,38 @@
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+
+using System;
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        D d = new d();
+        d.Print();
+    }
+}
+
+public class A
+{
+    public virtual void Print()
+    {
+        Console.WriteLine("Class A Implemented.");
+    }
+}
+public class B : A
+{
+    public override void Print()
+    {
+        Console.WriteLine("Class B Implemented.");
+    }
+}
+public class C : A
+{
+    public override void Print()
+    {
+        Console.WriteLine("Class C Implemented.");
+    }
+}
+public class D : B,C
+{
+    
+}
