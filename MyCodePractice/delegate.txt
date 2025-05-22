@@ -1,0 +1,31 @@
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+
+using System;
+public delegate T add<T>(T param1, T param2);
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        add<int> sum = ClassA.MethodA;
+        PrintResult(sum);
+    }
+    public static void PrintResult(add<int> iDel)
+    {
+        Console.WriteLine("Result = "+iDel(10,20));
+    }
+}
+public static class ClassA
+{
+    public static int MethodA(int p, int q)
+    {
+        return p+q;
+    }
+}
+public static class ClassB
+{
+    public static int MethodB()
+    {
+        return 200;
+    }
+}

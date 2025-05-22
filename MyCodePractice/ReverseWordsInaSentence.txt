@@ -1,0 +1,42 @@
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        //Console.WriteLine ("Try programiz.pro");
+        string str = "This is greet and nothing else";
+        char[] strArray = str.ToCharArray();
+        string word = "";
+        StringBuilder reverseString = new StringBuilder();
+        int count = 0;
+        for(int i=0; i<strArray.Length; i++)
+        {
+            if(char.IsWhiteSpace(strArray[i]))
+            {
+                count++;
+                if(count == 1)
+                {
+                    reverseString.Insert(0, word);
+                }
+                else
+                {
+                    reverseString.Insert(0, word + " ");
+                }
+                word = "";
+            }
+            else
+            {
+                 word += strArray[i];
+            }
+            
+        }
+        reverseString.Insert(0, word+" ");
+        Console.WriteLine(count);
+        Console.WriteLine(reverseString);
+    }
+}
