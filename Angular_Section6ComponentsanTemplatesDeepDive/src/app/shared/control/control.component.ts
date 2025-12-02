@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, HostListener, inject, input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, afterRender, Component, contentChild, ElementRef, HostBinding, HostListener, inject, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -19,10 +19,24 @@ export class ControlComponent {
 //  }
   label = input.required<string>();
   private el = inject(ElementRef);
+  // @ContentChild('input') private control? : 
+  //   ElementRef<HTMLInputElement | HTMLTextAreaElement>;
+  private control = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
+  
+  constructor(){
+      afterRender(() => {
+        console.log('after Render');
+      })
+      afterNextRender(() => {
+        console.log('after next render');
+      })
+  }
+  
   
   onClick(){
     console.log('Clicked!');
     console.log(this.el);
+    console.log(this.control());
   }
  
 }
