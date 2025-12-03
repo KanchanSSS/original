@@ -1,9 +1,17 @@
-<form (ngSubmit)="onSubmit(titleElement.value, ticketText.value)" #form>
+<form (ngSubmit)="onSubmit()" #form>
   <app-control label="Title">
-    <input type="text" id="title" name="title" #titleElement #input/>
+    <input type="text" 
+    id="title" 
+    name="title" 
+    [(ngModel)]="enteredTitle" 
+    #input/>
   </app-control>
   <app-control label="Request">
-    <textarea name="request" id="request" rows="3" #ticketText #input></textarea>
+    <textarea name="request" 
+    id="request" 
+    rows="3" 
+    [(ngModel)]="enteredText"
+    #input></textarea>
   </app-control>
   <p>
     <button appButton>        
