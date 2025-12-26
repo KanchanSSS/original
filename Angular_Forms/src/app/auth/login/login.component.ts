@@ -1,54 +1,43 @@
-import {
-  afterNextRender,
-  Component,
-  DestroyRef,
-  inject,
-  viewChild,
-  ViewChild,
-} from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-import { debounceTime } from 'rxjs';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports:[ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  private form = viewChild.required<NgForm>('form');
-  private destrotRef = inject(DestroyRef);
+  form = new FormGroup({
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email]
+    }),
+    password: new FormControl('', {
+      validators:[Validators.required, Validators.minLength(6)]
+    })
+  })
 
-  constructor() {
-    afterNextRender(() => {
-      const savedForm = window.localStorage.getItem('saved-login-form');
-      if(savedForm){
-        const loadedFormData = JSON.parse(savedForm);
-        const savedEmail = loadedFormData.email;
-        setTimeout(() => {
-          this.form().controls['email'].setValue(savedEmail);
-        },1)
-      }
-
-      const subscription = this.form().valueChanges?.pipe(debounceTime(500)).subscribe({
-        next: (value) =>
-          window.localStorage.setItem(
-            'saved-login-form',
-            JSON.stringify({ email: value.email })
-          ),
-      });
-
-      this.destrotRef.onDestroy(() => {
-        subscription?.unsubscribe();
-      });
-    });
+  get emailIsInvalid(){
+    return (this.form.controls.email.invalid &&
+      this.form.controls.email.touched &&
+      this.form.controls.email.dirty
+    )
   }
-  onSubmit(formData: NgForm) {
-    const email = formData.form.value.email;
-    const password = formData.form.value.password;
-    console.log(email, password);
 
-    formData.form.reset();
+  get passwordIsInvalid(){
+    return (this.form.controls.email.invalid &&
+      this.form.controls.email.touched &&
+      this.form.controls.email.dirty
+    )
+  }
+
+  onSubmit(){
+    console.log(this.form);
+    const email = this.form.value.email;
+    const password = this.form.value.password;
+    console.log(email, password);
   }
 }
